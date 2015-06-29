@@ -1,31 +1,39 @@
-Freelancer Jekyll theme
-=========================
-
-Jekyll theme based on [Freelancer bootstrap theme ](http://startbootstrap.com/templates/freelancer/)
-
-## How to use
- - Place a image in `/img/portoflio/`
- - Create posts to display your projects. Use the follow as an example:
-```txt
----
-layout: default
-modal-id: 1
-date: 2014-07-18
-img: cabin.png
-alt: image-alt
-project-date: July 2014
-client: The Client
-category: Web Development
-description: The description of the project
-
----
-```
+# iCard-Resume
+-------
+iCard-Resume is a theme built on top of bootstrap and other freely available libraries. Its aimed to provide a fully furnished Jekyll theme for personal resume.
 
 ## Demo
-View this jekyll theme in action [here](https://jeromelachaud.github.io/freelancer-theme)
+-------
+You can see the live demo of [iCard-Resume](http://ddbullfrog.com/)
 
-## Screenshot
-![screenshot](https://raw.githubusercontent.com/jeromelachaud/freelancer-theme/master/screenshot.png)
+This is the web page on desktop browser.
 
-=========
-For more details, read [documentation](http://jekyllrb.com/)
+![Desktop](https://github.com/ddbullfrog/iCard-Resume/blob/gh-pages/_assets/normal.jpg)
+
+## Getting Started
+-------
+- [Fork this repository](https://github.com/ddbullfrog/iCard-Resume/fork)
+- Clone it: `git clone https://github.com/YOUR-USER/ddbullfrog.github.io`
+- Run the jekyll server: `jekyll serve`
+
+You should have a server up and running locally at <http://localhost:4000>.
+
+## Features
+-------
+- Responsive Jekyll theme
+- Easy integration with Google Analytics
+
+## Configuration
+-------
+- _config.yml
+-  CNAME
+	If you're using this on GitHub Pages with a custom domain name, 
+	you'll want to change this to be the domain you're going to use. 
+	All that should be in here is a domain name on the first line and nothing else (like: `example.com`).
+-  avatar.JPG
+	This is a smaller version of my gravatar for use as the icon in your browser's address bar. 
+	You should change it to whatever you'd like.
+
+## License
+-------
+Open sourced under the [MIT license](LICENSE.md).

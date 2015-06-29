@@ -3,23 +3,18 @@
 
   {% include head.html %}
 
-    <body id="page-top" class="index">
+  <body>
 
-        {% include svg-defs.svg %}
+    {% include header.html %}
 
-        {% include header.html %}
+    <div class="page-content">
+      <div class="wrapper">
+        {{ content }}
+      </div>
+    </div>
 
-        {% include portfolio_grid.html %}
+    {% include footer.html %}
+	{% include googleanalytics.html %}
+  </body>
 
-        {% include about.html %}
-
-        {% include contact.html %}
-
-        {% include footer.html %}
-
-        {% include modals.html %}
-
-        {% include js.html %}
-
-    </body>
 </html>

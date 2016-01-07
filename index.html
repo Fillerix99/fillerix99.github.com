@@ -30,7 +30,7 @@
                      "<ul>" +
                      "<li><strong>help</strong> - display this help.</li>." +
                      "<li><strong>ls</strong> - displays all files in this dir.</li>" +
-                     "<li><strong>show</strong> - shows content in file.</li>" +
+                     "<li><strong>filename</strong> - opens file and outputs it.</li>" +
                      "</ul></div>";
         return output;
       };
@@ -41,15 +41,25 @@
       };
 	  
 	       cmds.ls = function(args) {
-        if(args.length < 2) return "<p> secret_stuff.txt | drdinosucks.fillerinoiscool |</p>";
+        if(args.length < 2) return "<p> secret_stuff | drdinosucks_fillerinoiscool |</p>";
       };
 	  
-	  	       cmds.show = function(args) {
-        if(args.length < 14) return "<p>Please enter full filename.</p>";
-        else if(args.length = 14) return "<p>*Fillerino is the best man in the world*</p>";
-		else if(args.length = 27) return "<p>*That is true!*</p>";
+      cmds.secret_stuff = function() {
+        var output = "<div>" +
+                     "<li> Fillerino is cool</li>." +
+                     "<li>and everyboady else too</li>" +
+                     "<li>stop try to hack array...</li>" +
+                     "</div>";
+        return output;
       };
-
+      cmds.drdinosucks_fillerinoiscool = function() {
+        var output = "<div>" +
+                     "<li>filename is right</li>." +
+                     "<li>extra line</li>" +
+                     "<li>extra line</li>" +
+                     "</div>";
+        return output;
+      };
       cmds.weather = function(args) {
         args.shift();
         var xhr = new XMLHttpRequest();

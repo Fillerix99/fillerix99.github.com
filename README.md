@@ -1,39 +1,84 @@
-# iCard-Resume
--------
-iCard-Resume is a theme built on top of bootstrap and other freely available libraries. Its aimed to provide a fully furnished Jekyll theme for personal resume.
+fake-terminal
+===========
 
-## Demo
--------
-You can see the live demo of [iCard-Resume](http://ddbullfrog.com/)
+An extensible pseudo-terminal web component for your website (or whatever you do in the browser), based on [terminal.js](https://github.com/avgp/terminal.js).
 
-This is the web page on desktop browser.
+## What's this?
+Terminal.js is a Javascript terminal emulation for use in the browser, bundled as a web component.
 
-![Desktop](https://github.com/ddbullfrog/iCard-Resume/blob/gh-pages/_assets/normal.jpg)
+I have a [live demo here](http://avgp.github.io/fake-terminal/index.html)
 
-## Getting Started
--------
-- [Fork this repository](https://github.com/ddbullfrog/iCard-Resume/fork)
-- Clone it: `git clone https://github.com/YOUR-USER/ddbullfrog.github.io`
-- Run the jekyll server: `jekyll serve`
+You can do a bunch of things with it:
 
-You should have a server up and running locally at <http://localhost:4000>.
+- Create a CLI-style API interface that runs in the browser
+- Create a remote terminal emulator for something that exposes an interface in a browser-consumable way (CORS, Websocket, WebRTC, ...)
+- Create a text-based adventure game in the browser
+- whatever you can come up with, where a command line interface is useful.
 
-## Features
--------
-- Responsive Jekyll theme
-- Easy integration with Google Analytics
+## How do I use it?
+It's really easy:
 
-## Configuration
--------
-- _config.yml
--  CNAME
-	If you're using this on GitHub Pages with a custom domain name, 
-	you'll want to change this to be the domain you're going to use. 
-	All that should be in here is a domain name on the first line and nothing else (like: `example.com`).
--  avatar.JPG
-	This is a smaller version of my gravatar for use as the icon in your browser's address bar. 
-	You should change it to whatever you'd like.
+1. Add a `<link rel="import" href="https://fe1a7206bd2241e9262755c6f3d895bed9fd49d2.googledrive.com/host/0B9MEoZDi5-peaWNXWDhwNHNUTDA/fake-terminal.html">` to your `<head>` (or host that file yourself)
+2. Add a `<fake-terminal>$</fake-terminal>` to your page body (you can customize the terminal prompt by using different content instead of $)
+3. Create commands as methods of a javascript object and use the `commands` property to expose them, like explained below.
 
-## License
--------
-Open sourced under the [MIT license](LICENSE.md).
+## Extensible command interface
+
+The terminal is only a way to interact with "commands" and "commands" are a bundles of functionality.  
+So to use the terminal, you'll need to create a bunch of functions that actually do something - and that's not hard.
+
+### A greeting command
+So let's build a command that greets the user with the name she enters, like this:
+
+```bash
+$ hello Alice
+Hi there, Alice
+```
+
+in Terminal.js this is done by creating a ``commands`` object and add a "hello" method to it.  
+That method will take one parameter, which will be the array of arguments (separated by spaces) entered to call the command and returns HTML to be displayed in the terminal.
+
+```javascript
+var commands = {
+  hello: function(args) {
+    if(args.length < 2) return "<div>Please tell me your name like this: <pre>hello Alice</pre></div>";
+    return "<div>Hi there, " + args[1] + "</div>";
+  }
+};
+```
+
+Note that the ``args`` array's first element is the name of the command itself.
+
+Now we can make our terminal:
+
+```html
+  <!doctype html>
+  <html>
+    <head>
+      <link rel="fake-terminal.html">
+    </head>
+    <body>
+      <fake-terminal id="myterm">guest@terminal.js &sim; &gt;</fake-terminal>
+      <script>
+        var cmds = {}, terminal = document.getElementById("myterm");
+        cmds.hello = function(args) { return "<h1>Hello, " + (args[1] || "unknown") + "</h1>"; };
+        if(terminal.ready) {
+          // the native web components implementation was faster :-)
+          terminal.commands = cmds
+        } else {
+          // the polyfill needs some more time..
+          terminal.onload = function() {
+            this.commands = cmds;
+          }
+        }
+      </script>
+    </body>
+  </html>
+```
+and we're done. We have a terminal that can greet the user :)
+
+### A full example
+The code for the [live demo](http://avgp.github.io/fake-terminal) lives in index.html.
+
+# License
+MIT License - basically: Do whatever you feel like, but don't sue me when it blows up.
